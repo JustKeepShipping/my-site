@@ -1,6 +1,6 @@
 baseURL = 'https://JustKeepShipping.github.io/my-site/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'Code Camp'
 theme = "PaperMod"
 [params]
 defaultTheme = "auto" #dark/light based on system
@@ -10,6 +10,10 @@ ShowPostNavLinks = true
 ShowBreadCrumbs = true
 ShowCodeCopyButtons = true
 ShowRssButtonInSectionTermList = true
+
+[params.homeInfoParams]
+    Title = "Coding Camp"
+    Content = "Learning coding, networking, infrastructure & cloud — one weekend project at a time."
 
 [menu]
 [[menu.main]]
