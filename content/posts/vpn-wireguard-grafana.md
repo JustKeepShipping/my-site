@@ -1,6 +1,6 @@
 ---
 title: "Weekend Project #2 — WireGuard VPN + Grafana Monitoring"
-date: 2025-09-28T12:00:00+00:00
+date: 2025-09-27T12:00:00+00:00
 draft: false
 tags: ["wireguard", "vpn", "grafana", "prometheus", "learning", "devops"]
 categories: ["Weekend Projects"]
