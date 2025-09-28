@@ -11,10 +11,6 @@ hidemeta: false
 comments: true
 description: "How I set up a personal VPN with WireGuard on a VPS and added Grafana monitoring to track performance."
 summary: "Spun up a VPS, built a WireGuard VPN I can connect to from my phone and laptop, and stood up Grafana + Prometheus for monitoring."
-cover:
-    image: "/images/vpn-grafana-cover.png" # optional, add later if you want a header image
-    alt: "VPN + Grafana dashboard"
-    caption: "VPN & Monitoring weekend project"
 ---
 ## Why this project
 I’m learning networking/infrastructure by building small, useful things. In this one I wanted a secure VPN I control plus a basic monitoring stack to see what my server is doing.
@@ -43,13 +39,13 @@ I’m learning networking/infrastructure by building small, useful things. In th
    - `prom/prometheus`, `node-exporter` (host metrics), `prom/blackbox-exporter` (pings), `grafana/grafana-oss`.
    - Grafana panels: CPU %, memory (GB), uptime, ping latency/success.
 
-## Server config looked like (/etc/wireguard/wg0.conf)
-[Interface]
-Address = 10.6.0.1/24
+**Server config looked like** (/etc/wireguard/wg0.conf):
+- [Interface]
+'Address = 10.6.0.1/24
 ListenPort = 51820
 PrivateKey = <server-private-key>
 PostUp = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT
-PostDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT
+PostDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT'
 
 ## Client config pattern looked like
 [Interface]
