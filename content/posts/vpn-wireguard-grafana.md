@@ -45,8 +45,7 @@ I’m learning networking/infrastructure by building small, useful things. In th
    - PostDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT'. 
 
 **Client config pattern looked like**
-   - [Interface], `PrivateKey = <client-private>`, 'Address = 10.6.0.X/32' 
-'DNS = 1.1.1.1'. 
+   - [Interface], `PrivateKey = <client-private>`, 'Address = 10.6.0.X/32', 'DNS = 1.1.1.1',. 
 
    - [Peer], `PublicKey = <server-public>`, `Endpoint = <VPS-IP>:51820`, `AllowedIPs = 0.0.0.0/0`, 
 `PersistentKeepalive = 25`. 
@@ -75,7 +74,7 @@ sysctl --system
 wg-quick up wg0
 systemctl enable wg-quick@wg0
 wg
-'''
+/bash
 
 ## Gotchas I fixed:
 1. **WireGuard PostUp error**: my iptables commands wrapped onto new lines → WireGuard parser choked. Fix: keep PostUp/PostDown each on one line separated by semicolons 
