@@ -40,24 +40,16 @@ I’m learning networking/infrastructure by building small, useful things. In th
    - Grafana panels: CPU %, memory (GB), uptime, ping latency/success.
 
 **Server config looked like** (/etc/wireguard/wg0.conf):
-- [Interface]
-'Address = 10.6.0.1/24
-ListenPort = 51820
-PrivateKey = <server-private-key>
-PostUp = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT
-PostDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT'
+   - [Interface] 'Address = 10.6.0.1/24', 'ListenPort = 51820', 'PrivateKey = <server-private-key>'. 
+   - PostUp = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT. 
+   - PostDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT'. 
 
-## Client config pattern looked like
-[Interface]
-PrivateKey = <client-private>
-Address = 10.6.0.X/32
-DNS = 1.1.1.1
+**Client config pattern looked like**
+   - [Interface], `PrivateKey = <client-private>`, 'Address = 10.6.0.X/32' 
+'DNS = 1.1.1.1'. 
 
-[Peer]
-PublicKey = <server-public>
-Endpoint = <VPS-IP>:51820
-AllowedIPs = 0.0.0.0/0
-PersistentKeepalive = 25
+   - [Peer], `PublicKey = <server-public>`, `Endpoint = <VPS-IP>:51820`, `AllowedIPs = 0.0.0.0/0`, 
+`PersistentKeepalive = 25`. 
 
 ## Key commands (representative)
 ```bash
@@ -83,6 +75,7 @@ sysctl --system
 wg-quick up wg0
 systemctl enable wg-quick@wg0
 wg
+'''
 
 ## Gotchas I fixed:
 1. **WireGuard PostUp error**: my iptables commands wrapped onto new lines → WireGuard parser choked. Fix: keep PostUp/PostDown each on one line separated by semicolons 
