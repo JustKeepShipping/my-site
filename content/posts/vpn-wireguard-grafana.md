@@ -74,7 +74,7 @@ sysctl --system
 wg-quick up wg0
 systemctl enable wg-quick@wg0
 wg
-/bash
+'''
 
 ## Gotchas I fixed:
 1. **WireGuard PostUp error**: my iptables commands wrapped onto new lines → WireGuard parser choked. Fix: keep PostUp/PostDown each on one line separated by semicolons 
